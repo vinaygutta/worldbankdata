@@ -18,7 +18,6 @@ public class WorldBankData {
 	static String driverPath = "C:\\Program Files (x86)\\Internet Explorer\\iexplore.exe";
 
 	private WebDriver driver;
-	private WebDriverWait webwait;
 	  private String baseUrl;
 	  private boolean acceptNextAlert = true;
 	  private StringBuffer verificationErrors = new StringBuffer();
@@ -30,10 +29,9 @@ public class WorldBankData {
 	    driver = new FirefoxDriver();
 	    	    baseUrl = "http://www.worldbank.org";
 	    	    driver.manage().window().maximize();
-	    	    Dimension dim=new Dimension(800,600);
-	    	    driver.manage().window().setSize(dim); 
+//	    	    Dimension dim=new Dimension(800,600);
+//	    	    driver.manage().window().setSize(dim); 
 	    driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
-	    	    webwait=new WebDriverWait(driver,20);
 	  }
 
 	  @Test
@@ -42,21 +40,18 @@ public class WorldBankData {
 	    driver.findElement(By.xpath("(//a[contains(text(),'Data')])[2]")).click();
 	    driver.findElement(By.linkText("visit the old site here")).click();
 	    driver.findElement(By.linkText("By Country")).click();
-	    //isElementPresent(By.linkText("High income"));
-	    //webwait.until(ExpectedConditions.elementToBeClickable(By.linkText("High income")));
-	    Thread.sleep(10000);
+	    
 	    String highincome = driver.findElement(By.linkText("High income")).getAttribute("href");
 	    driver.get(highincome);
-	    //isElementPresent(By.linkText("Andorra"));
-	    /*System.out.println("beforeelement");
-	    WebElement element = driver.findElement(By.linkText("Andorra"));
-System.out.println("afterelement");
-	    Actions actions = new Actions(driver);
-	    System.out.println("afteractiona");
-	    actions.moveToElement(element).click().perform();
-	    System.out.println("aftermove");*/
-	    String unitst = driver.findElement(By.linkText("United States")).getAttribute("href");
+
+	    String unitst = driver.findElement(By.linkText("Sweden")).getAttribute("href");
 	    driver.get(unitst);
+	    
+	    String gdp = driver.findElement(By.xpath("//*[@id='nav-header-top-left-area']/div[2]/div/div/div[1]/div/div[2]/span/span/a/span")).getText();
+	    System.out.println("GDP: " + gdp);
+	    
+	    String popu = driver.findElement(By.xpath("//*[@id='nav-header-top-left-area']/div[2]/div/div/div[2]/div/div/div/div[2]/span/span/a/span")).getText();
+	    System.out.println("Population: " + popu);
 	    
 	    //driver.findElement(By.linkText("United States")).click();
 
@@ -68,7 +63,7 @@ System.out.println("afterelement");
 
 	  @After
 	  public void tearDown() throws Exception {
-	    //driver.quit();
+	    driver.quit();
 	    String verificationErrorString = verificationErrors.toString();
 	    if (!"".equals(verificationErrorString)) {
 	      fail(verificationErrorString);
