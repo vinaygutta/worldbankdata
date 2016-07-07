@@ -50,6 +50,12 @@ public class WorldBankData {
 	    String gdp = driver.findElement(By.xpath("//*[@id='nav-header-top-left-area']/div[2]/div/div/div[1]/div/div[2]/span/span/a/span")).getText();
 	    System.out.println("GDP: " + gdp);
 	    
+	    String str = gdp.replaceAll("[^-?.0-9]+", "");
+	    
+	    double gdpint = Double.parseDouble(str);
+	    System.out.println("GDP Int = " +gdpint);
+	    
+	    
 	    String popu = driver.findElement(By.xpath("//*[@id='nav-header-top-left-area']/div[2]/div/div/div[2]/div/div/div/div[2]/span/span/a/span")).getText();
 	    System.out.println("Population: " + popu);	    
 	    
