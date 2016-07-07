@@ -51,14 +51,8 @@ public class WorldBankData {
 	    System.out.println("GDP: " + gdp);
 	    
 	    String popu = driver.findElement(By.xpath("//*[@id='nav-header-top-left-area']/div[2]/div/div/div[2]/div/div/div/div[2]/span/span/a/span")).getText();
-	    System.out.println("Population: " + popu);
+	    System.out.println("Population: " + popu);	    
 	    
-	    //driver.findElement(By.linkText("United States")).click();
-
-	    //driver.findElement(By.linkText("Andorra")).click();
-	    // ERROR: Caught exception [unknown command [clickAndWaitre]]
-	    //driver.findElement(By.linkText("High income")).click();
-	    // ERROR: Caught exception [unknown command []]
 	  }
 
 	  @After
