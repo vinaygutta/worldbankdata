@@ -16,13 +16,10 @@ public class WorldBankDataUtilities {
 			"Spain", "St. Kitts and Nevis", "St. Martin (French part)", "Sweden", "Switzerland", "Taiwan, China",
 			"Trinidad and Tobago", "Turks and Caicos Islands", "United Arab Emirates", "United Kingdom",
 			"United States", "Uruguay", "Virgin Islands (U.S.)" };
-	// private String[] countList = {"Andorra","Antigua and Barbuda","Bahamas,
-	// The","Australia"};
 
 	private final String COMMA_DELIMITER = ",";
 	private final String NEW_LINE_SEPARATOR = "\n";
 
-	// CSV file header
 	private final String FILE_HEADER = "Country,GDP,Population,CO2";
 	private FileWriter writer = null;
 
@@ -39,10 +36,7 @@ public class WorldBankDataUtilities {
 
 			writer.append(FILE_HEADER.toString());
 
-			// Add a new line separator after the header
 			writer.append(NEW_LINE_SEPARATOR);
-
-			// generate whatever data you want
 
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -73,8 +67,6 @@ public class WorldBankDataUtilities {
 			writer.append(co2);
 			writer.append(NEW_LINE_SEPARATOR);
 
-			// generate whatever data you want
-
 		} catch (IOException e) {
 			e.printStackTrace();
 		} finally {
@@ -103,8 +95,6 @@ public class WorldBankDataUtilities {
 			writer.append(COMMA_DELIMITER);
 			writer.append(Integer.toString(co2));
 			writer.append(NEW_LINE_SEPARATOR);
-
-			// generate whatever data you want
 
 		} catch (IOException e) {
 			e.printStackTrace();

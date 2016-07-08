@@ -13,8 +13,6 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 
 public class WorldBankData {
 
-	static String driverPath = "C:\\Program Files (x86)\\Internet Explorer\\iexplore.exe";
-
 	private HashMap<String, Long> mapgdp = new HashMap<String, Long>();
 	private HashMap<String, Long> mappopu = new HashMap<String, Long>();
 	private HashMap<String, Long> mapco2 = new HashMap<String, Long>();
@@ -33,14 +31,12 @@ public class WorldBankData {
 
 	@Before
 	public void setUp() throws Exception {
-		// System.setProperty("webdriver.ie.driver", driverPath);
-		// driver = new InternetExplorerDriver();
+
 		driver = new FirefoxDriver();
 		baseUrl = "http://www.worldbank.org";
 		driver.manage().window().maximize();
-		// Dimension dim=new Dimension(800,600);
-		// driver.manage().window().setSize(dim);
-		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+
+		driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
 		utiliy = new WorldBankDataUtilities();
 		startTime = System.currentTimeMillis();
 	}
@@ -54,7 +50,7 @@ public class WorldBankData {
 		String popu = "";
 		String co2 = "";
 		driver.get(baseUrl);
-		driver.findElement(By.xpath("(//a[contains(text(),'Data')])[2]")).click();
+		driver.findElement(By.xpath("//*[@id='hf_header_wrapper']/div/ul[2]/li[3]/a")).click();
 		driver.findElement(By.linkText("visit the old site here")).click();
 		driver.findElement(By.linkText("By Country")).click();
 
@@ -76,8 +72,7 @@ public class WorldBankData {
 
 			if (isElementPresent(By.xpath("//*[@id='nav-header-top-left-area']/h1"))) {
 				cntry = driver.findElement(By.xpath("//*[@id='nav-header-top-left-area']/h1")).getText();
-				// System.out.println("=============");
-				// System.out.println(cntry);
+
 			}
 
 			if (isElementPresent(By
@@ -87,13 +82,9 @@ public class WorldBankData {
 								.xpath("//*[@id='nav-header-top-left-area']/div[2]/div/div/div[1]/div/div[2]/span/span/a/span"))
 						.getText();
 
-				// System.out.println("GDP: " + gdp);
 				long gdplong = utiliy.convertStringToNumber(gdp);
 
-				// System.out.println("GDP Long: " + gdplong);
-
 				mapgdp.put(cntry, gdplong);
-				// System.out.println("GDP Int = " +gdpint);
 			}
 
 			if (isElementPresent(By.xpath(
@@ -102,10 +93,18 @@ public class WorldBankData {
 						.findElement(By
 								.xpath("//*[@id='nav-header-top-left-area']/div[2]/div/div/div[2]/div/div/div/div[2]/span/span/a/span"))
 						.getText();
-				// System.out.println("Population: " + popu);
 				long populong = utiliy.convertStringToNumber(popu);
 
-				// System.out.println("Popu Long: " + populong);
+				mappopu.put(cntry, populong);
+			} else if (isElementPresent(By.xpath(
+					"//*[@id='nav-header-top-left-area']/div[2]/div/div/div/div/div/div/div[2]/span/span/a/span"))) {
+
+				popu = driver
+						.findElement(By
+								.xpath("//*[@id='nav-header-top-left-area']/div[2]/div/div/div/div/div/div/div[2]/span/span/a/span"))
+						.getText();
+				long populong = utiliy.convertStringToNumber(popu);
+
 				mappopu.put(cntry, populong);
 			}
 
@@ -113,10 +112,9 @@ public class WorldBankData {
 				co2 = driver
 						.findElement(By.xpath("//*[@id='boxes-box-country_wdi_block2']/div/div[2]/div/div/div/span[1]"))
 						.getText();
-				// System.out.println("CO2: " + co2);
+
 				long co2long = utiliy.convertStringToNumber(co2);
 
-				// System.out.println("CO2 Long: " + co2long);
 				mapco2.put(cntry, co2long);
 			}
 
@@ -134,14 +132,17 @@ public class WorldBankData {
 		int count = 1;
 		try {
 			writergdp = new FileWriter("top3countriesbygdp.log");
+			writergdp.append("Top 3 countries by GDP at market prices (current US$)");
+			writergdp.append("\n");
+			writergdp.append("=====================================================");
+			writergdp.append("\n");
 			writergdp.flush();
 			writergdp.close();
 		} catch (IOException ex) {
 			ex.printStackTrace();
 		}
 		for (Object e : agdp) {
-			// System.out.println(((Map.Entry<String, Long>) e).getKey() + " : "
-			// + ((Map.Entry<String, Long>) e).getValue());
+
 			try {
 				if (count <= 3) {
 					writergdp = new FileWriter("top3countriesbygdp.log", true);
@@ -166,14 +167,17 @@ public class WorldBankData {
 		int countpopu = 1;
 		try {
 			writerpopu = new FileWriter("top3countriesbypopu.log");
+			writerpopu.append("Top 3 countries by Population");
+			writerpopu.append("\n");
+			writerpopu.append("=============================");
+			writerpopu.append("\n");
 			writerpopu.flush();
 			writerpopu.close();
 		} catch (IOException ex) {
 			ex.printStackTrace();
 		}
 		for (Object e : apopu) {
-			// System.out.println(((Map.Entry<String, Long>) e).getKey() + " : "
-			// + ((Map.Entry<String, Long>) e).getValue());
+
 			try {
 				if (countpopu <= 3) {
 					writerpopu = new FileWriter("top3countriesbypopu.log", true);
@@ -198,14 +202,17 @@ public class WorldBankData {
 		int countco2 = 1;
 		try {
 			writerco2 = new FileWriter("top3countriesbyco2.log");
+			writerco2.append("Top 3 countries by CO2 emissions");
+			writerco2.append("\n");
+			writerco2.append("================================");
+			writerco2.append("\n");
 			writerco2.flush();
 			writerco2.close();
 		} catch (IOException ex) {
 			ex.printStackTrace();
 		}
 		for (Object e : aco2) {
-			// System.out.println(((Map.Entry<String, Long>) e).getKey() + " : "
-			// + ((Map.Entry<String, Long>) e).getValue());
+
 			try {
 				if (countco2 <= 3) {
 					writerco2 = new FileWriter("top3countriesbyco2.log", true);
