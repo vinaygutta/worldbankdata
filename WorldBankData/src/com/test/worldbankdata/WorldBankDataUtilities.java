@@ -24,7 +24,7 @@ public class WorldBankDataUtilities {
 
 	// CSV file header
 	private final String FILE_HEADER = "Country,GDP,Population,CO2";
-	FileWriter writer = null;
+	private FileWriter writer = null;
 
 	public WorldBankDataUtilities() {
 	}

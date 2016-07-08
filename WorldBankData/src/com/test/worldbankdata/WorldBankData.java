@@ -19,17 +19,15 @@ public class WorldBankData {
 	private HashMap<String, Long> mappopu = new HashMap<String, Long>();
 	private HashMap<String, Long> mapco2 = new HashMap<String, Long>();
 
-	FileWriter writergdp = null;
-	FileWriter writerpopu = null;
-	FileWriter writerco2 = null;
+	private FileWriter writergdp = null;
+	private FileWriter writerpopu = null;
+	private FileWriter writerco2 = null;
 
-	long startTime;
-	long endTime;
+	private long startTime;
+	private long endTime;
 
 	private WebDriver driver;
 	private String baseUrl;
-	private boolean acceptNextAlert = true;
-	private StringBuffer verificationErrors = new StringBuffer();
 
 	private WorldBankDataUtilities utiliy;
 
