@@ -10,6 +10,7 @@ import java.util.concurrent.TimeUnit;
 import org.junit.*;
 import org.openqa.selenium.*;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.ie.InternetExplorerDriver;
 
 public class WorldBankData {
 
@@ -31,7 +32,9 @@ public class WorldBankData {
 
 	@Before
 	public void setUp() throws Exception {
-
+		// System.setProperty("webdriver.ie.driver",
+		// "D:\\sele\\IEDriverServer_Win32_2.53.1\\IEDriverServer.exe");
+		// driver = new InternetExplorerDriver();
 		driver = new FirefoxDriver();
 		baseUrl = "http://www.worldbank.org";
 		driver.manage().window().maximize();
@@ -133,9 +136,9 @@ public class WorldBankData {
 		try {
 			writergdp = new FileWriter("top3countriesbygdp.log");
 			writergdp.append("Top 3 countries by GDP at market prices (current US$)");
-			writergdp.append("\n");
+			writergdp.append(System.lineSeparator());
 			writergdp.append("=====================================================");
-			writergdp.append("\n");
+			writergdp.append(System.lineSeparator());
 			writergdp.flush();
 			writergdp.close();
 		} catch (IOException ex) {
@@ -148,7 +151,7 @@ public class WorldBankData {
 					writergdp = new FileWriter("top3countriesbygdp.log", true);
 					writergdp.append(
 							((Map.Entry<String, Long>) e).getKey() + " : " + ((Map.Entry<String, Long>) e).getValue());
-					writergdp.append("\n");
+					writergdp.append(System.lineSeparator());
 					writergdp.flush();
 					writergdp.close();
 				}
@@ -168,9 +171,9 @@ public class WorldBankData {
 		try {
 			writerpopu = new FileWriter("top3countriesbypopu.log");
 			writerpopu.append("Top 3 countries by Population");
-			writerpopu.append("\n");
+			writerpopu.append(System.lineSeparator());
 			writerpopu.append("=============================");
-			writerpopu.append("\n");
+			writerpopu.append(System.lineSeparator());
 			writerpopu.flush();
 			writerpopu.close();
 		} catch (IOException ex) {
@@ -183,7 +186,7 @@ public class WorldBankData {
 					writerpopu = new FileWriter("top3countriesbypopu.log", true);
 					writerpopu.append(
 							((Map.Entry<String, Long>) e).getKey() + " : " + ((Map.Entry<String, Long>) e).getValue());
-					writerpopu.append("\n");
+					writerpopu.append(System.lineSeparator());
 					writerpopu.flush();
 					writerpopu.close();
 				}
@@ -203,9 +206,9 @@ public class WorldBankData {
 		try {
 			writerco2 = new FileWriter("top3countriesbyco2.log");
 			writerco2.append("Top 3 countries by CO2 emissions");
-			writerco2.append("\n");
+			writerco2.append(System.lineSeparator());
 			writerco2.append("================================");
-			writerco2.append("\n");
+			writerco2.append(System.lineSeparator());
 			writerco2.flush();
 			writerco2.close();
 		} catch (IOException ex) {
@@ -218,7 +221,7 @@ public class WorldBankData {
 					writerco2 = new FileWriter("top3countriesbyco2.log", true);
 					writerco2.append(
 							((Map.Entry<String, Long>) e).getKey() + " : " + ((Map.Entry<String, Long>) e).getValue());
-					writerco2.append("\n");
+					writerco2.append(System.lineSeparator());
 					writerco2.flush();
 					writerco2.close();
 				}
