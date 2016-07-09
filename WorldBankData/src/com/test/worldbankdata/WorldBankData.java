@@ -9,6 +9,7 @@ import java.util.Map;
 import java.util.concurrent.TimeUnit;
 import org.junit.*;
 import org.openqa.selenium.*;
+import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
 
@@ -35,7 +36,10 @@ public class WorldBankData {
 		// System.setProperty("webdriver.ie.driver",
 		// "D:\\sele\\IEDriverServer_Win32_2.53.1\\IEDriverServer.exe");
 		// driver = new InternetExplorerDriver();
-		driver = new FirefoxDriver();
+
+		System.setProperty("webdriver.chrome.driver", "D:\\sele\\chromedriver_win32\\chromedriver.exe");
+		driver = new ChromeDriver();
+		// driver = new FirefoxDriver();
 		baseUrl = "http://www.worldbank.org";
 		driver.manage().window().maximize();
 
