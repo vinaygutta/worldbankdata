@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testng-results skipped="0" failed="0" total="3" passed="3">
+  <reporter-output>
+  </reporter-output>
+  <suite name="TestSuite" duration-ms="274463" started-at="2016-07-11T14:19:00Z" finished-at="2016-07-11T14:23:35Z">
+    <groups>
+    </groups>
+    <test name="ChromeTest" duration-ms="95679" started-at="2016-07-11T14:19:00Z" finished-at="2016-07-11T14:20:36Z">
+      <class name="com.test.worldbankdata.WorldBankData">
+        <test-method status="PASS" signature="setUp(java.lang.String)[pri:0, instance:com.test.worldbankdata.WorldBankData@1ceabc1]" name="setUp" is-config="true" duration-ms="4431" started-at="2016-07-11T19:49:00Z" finished-at="2016-07-11T19:49:05Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[Chrome]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- setUp -->
+        <test-method status="PASS" signature="testScriptext()[pri:0, instance:com.test.worldbankdata.WorldBankData@1ceabc1]" name="testScriptext" duration-ms="89753" started-at="2016-07-11T19:49:05Z" finished-at="2016-07-11T19:50:34Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testScriptext -->
+        <test-method status="PASS" signature="tearDown()[pri:0, instance:com.test.worldbankdata.WorldBankData@1ceabc1]" name="tearDown" is-config="true" duration-ms="1467" started-at="2016-07-11T19:50:34Z" finished-at="2016-07-11T19:50:36Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- tearDown -->
+      </class> <!-- com.test.worldbankdata.WorldBankData -->
+    </test> <!-- ChromeTest -->
+    <test name="FirefoxTest" duration-ms="101762" started-at="2016-07-11T14:20:36Z" finished-at="2016-07-11T14:22:18Z">
+      <class name="com.test.worldbankdata.WorldBankData">
+        <test-method status="PASS" signature="setUp(java.lang.String)[pri:0, instance:com.test.worldbankdata.WorldBankData@2d45ba]" name="setUp" is-config="true" duration-ms="9335" started-at="2016-07-11T19:50:36Z" finished-at="2016-07-11T19:50:45Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[Firefox]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- setUp -->
+        <test-method status="PASS" signature="testScriptext()[pri:0, instance:com.test.worldbankdata.WorldBankData@2d45ba]" name="testScriptext" duration-ms="91376" started-at="2016-07-11T19:50:45Z" finished-at="2016-07-11T19:52:17Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testScriptext -->
+        <test-method status="PASS" signature="tearDown()[pri:0, instance:com.test.worldbankdata.WorldBankData@2d45ba]" name="tearDown" is-config="true" duration-ms="1043" started-at="2016-07-11T19:52:17Z" finished-at="2016-07-11T19:52:18Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- tearDown -->
+      </class> <!-- com.test.worldbankdata.WorldBankData -->
+    </test> <!-- FirefoxTest -->
+    <test name="IETest" duration-ms="76926" started-at="2016-07-11T14:22:18Z" finished-at="2016-07-11T14:23:35Z">
+      <class name="com.test.worldbankdata.WorldBankData">
+        <test-method status="PASS" signature="setUp(java.lang.String)[pri:0, instance:com.test.worldbankdata.WorldBankData@2f8f11]" name="setUp" is-config="true" duration-ms="2850" started-at="2016-07-11T19:52:18Z" finished-at="2016-07-11T19:52:21Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[IE]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- setUp -->
+        <test-method status="PASS" signature="testScriptext()[pri:0, instance:com.test.worldbankdata.WorldBankData@2f8f11]" name="testScriptext" duration-ms="73050" started-at="2016-07-11T19:52:21Z" finished-at="2016-07-11T19:53:34Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testScriptext -->
+        <test-method status="PASS" signature="tearDown()[pri:0, instance:com.test.worldbankdata.WorldBankData@2f8f11]" name="tearDown" is-config="true" duration-ms="1021" started-at="2016-07-11T19:53:34Z" finished-at="2016-07-11T19:53:35Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- tearDown -->
+      </class> <!-- com.test.worldbankdata.WorldBankData -->
+    </test> <!-- IETest -->
+  </suite> <!-- TestSuite -->
+</testng-results>

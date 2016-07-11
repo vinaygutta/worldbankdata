@@ -3,19 +3,38 @@ package com.test.worldbankdata;
 import java.io.FileWriter;
 import java.io.IOException;
 
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.ie.InternetExplorerDriver;
+
 public class WorldBankDataUtilities {
-	private String[] countList = { "Andorra", "Antigua and Barbuda", "Aruba", "Australia", "Austria", "Bahamas, The",
-			"Bahrain", "Barbados", "Belgium", "Bermuda", "British Virgin Islands", "Brunei Darussalam", "Canada",
-			"Cayman Islands", "Channel Islands", "Chile", "Croatia", "Curacao", "Cyprus", "Czech Republic", "Denmark",
-			"Estonia", "Faroe Islands", "Finland", "France", "French Polynesia", "Germany", "Gibraltar", "Greece",
-			"Greenland", "Guam", "Hong Kong SAR, China", "Hungary", "Iceland", "Ireland", "Isle of Man", "Israel",
-			"Italy", "Japan", "Korea, Rep.", "Kuwait", "Latvia", "Liechtenstein", "Lithuania", "Luxembourg",
-			"Macao SAR, China", "Malta", "Monaco", "Nauru", "Netherlands", "New Caledonia", "New Zealand",
-			"Northern Mariana Islands", "Norway", "Oman", "Poland", "Portugal", "Puerto Rico", "Qatar", "San Marino",
-			"Saudi Arabia", "Seychelles", "Singapore", "Sint Maarten (Dutch part)", "Slovak Republic", "Slovenia",
-			"Spain", "St. Kitts and Nevis", "St. Martin (French part)", "Sweden", "Switzerland", "Taiwan, China",
-			"Trinidad and Tobago", "Turks and Caicos Islands", "United Arab Emirates", "United Kingdom",
-			"United States", "Uruguay", "Virgin Islands (U.S.)" };
+	// private String[] countList = { "Andorra", "Antigua and Barbuda", "Aruba",
+	// "Australia", "Austria", "Bahamas, The",
+	// "Bahrain", "Barbados", "Belgium", "Bermuda", "British Virgin Islands",
+	// "Brunei Darussalam", "Canada",
+	// "Cayman Islands", "Channel Islands", "Chile", "Croatia", "Curacao",
+	// "Cyprus", "Czech Republic", "Denmark",
+	// "Estonia", "Faroe Islands", "Finland", "France", "French Polynesia",
+	// "Germany", "Gibraltar", "Greece",
+	// "Greenland", "Guam", "Hong Kong SAR, China", "Hungary", "Iceland",
+	// "Ireland", "Isle of Man", "Israel",
+	// "Italy", "Japan", "Korea, Rep.", "Kuwait", "Latvia", "Liechtenstein",
+	// "Lithuania", "Luxembourg",
+	// "Macao SAR, China", "Malta", "Monaco", "Nauru", "Netherlands", "New
+	// Caledonia", "New Zealand",
+	// "Northern Mariana Islands", "Norway", "Oman", "Poland", "Portugal",
+	// "Puerto Rico", "Qatar", "San Marino",
+	// "Saudi Arabia", "Seychelles", "Singapore", "Sint Maarten (Dutch part)",
+	// "Slovak Republic", "Slovenia",
+	// "Spain", "St. Kitts and Nevis", "St. Martin (French part)", "Sweden",
+	// "Switzerland", "Taiwan, China",
+	// "Trinidad and Tobago", "Turks and Caicos Islands", "United Arab
+	// Emirates", "United Kingdom",
+	// "United States", "Uruguay", "Virgin Islands (U.S.)" };
+
+	private String[] countList = { "Andorra", "Antigua and Barbuda", "United States", "Uruguay",
+			"Virgin Islands (U.S.)" };
 
 	private final String COMMA_DELIMITER = ",";
 	private final String NEW_LINE_SEPARATOR = "\n";
@@ -30,55 +49,161 @@ public class WorldBankDataUtilities {
 		return countList;
 	}
 
-	public void generateCsvFileHeader() {
-		try {
-			writer = new FileWriter("countrydata.csv");
-
-			writer.append(FILE_HEADER.toString());
-
-			writer.append(NEW_LINE_SEPARATOR);
-
-		} catch (IOException e) {
-			e.printStackTrace();
-		} finally {
-
+	public void generateCsvFileHeader(WebDriver driver) {
+		if (driver instanceof FirefoxDriver) {
 			try {
-				writer.flush();
-				writer.close();
-			} catch (IOException e) {
-				System.out.println("Error while flushing/closing fileWriter !!!");
-				e.printStackTrace();
-			}
+				writer = new FileWriter("ffcountrydata.csv");
 
+				writer.append(FILE_HEADER.toString());
+
+				writer.append(NEW_LINE_SEPARATOR);
+
+			} catch (IOException e) {
+				e.printStackTrace();
+			} finally {
+
+				try {
+					writer.flush();
+					writer.close();
+				} catch (IOException e) {
+					System.out.println("Error while flushing/closing fileWriter !!!");
+					e.printStackTrace();
+				}
+
+			}
+		}
+
+		if (driver instanceof ChromeDriver) {
+			try {
+				writer = new FileWriter("chcountrydata.csv");
+
+				writer.append(FILE_HEADER.toString());
+
+				writer.append(NEW_LINE_SEPARATOR);
+
+			} catch (IOException e) {
+				e.printStackTrace();
+			} finally {
+
+				try {
+					writer.flush();
+					writer.close();
+				} catch (IOException e) {
+					System.out.println("Error while flushing/closing fileWriter !!!");
+					e.printStackTrace();
+				}
+
+			}
+		}
+
+		if (driver instanceof InternetExplorerDriver) {
+			try {
+				writer = new FileWriter("iecountrydata.csv");
+
+				writer.append(FILE_HEADER.toString());
+
+				writer.append(NEW_LINE_SEPARATOR);
+
+			} catch (IOException e) {
+				e.printStackTrace();
+			} finally {
+
+				try {
+					writer.flush();
+					writer.close();
+				} catch (IOException e) {
+					System.out.println("Error while flushing/closing fileWriter !!!");
+					e.printStackTrace();
+				}
+
+			}
 		}
 
 	}
 
-	public void generateCsvFile(String country, String gdp, String population, String co2) {
-		try {
-			writer = new FileWriter("countrydata.csv", true);
-
-			writer.append(country);
-			writer.append(COMMA_DELIMITER);
-			writer.append(gdp);
-			writer.append(COMMA_DELIMITER);
-			writer.append(population);
-			writer.append(COMMA_DELIMITER);
-			writer.append(co2);
-			writer.append(NEW_LINE_SEPARATOR);
-
-		} catch (IOException e) {
-			e.printStackTrace();
-		} finally {
-
+	public void generateCsvFile(WebDriver driver, String country, String gdp, String population, String co2) {
+		if (driver instanceof FirefoxDriver) {
 			try {
-				writer.flush();
-				writer.close();
-			} catch (IOException e) {
-				System.out.println("Error while flushing/closing fileWriter !!!");
-				e.printStackTrace();
-			}
+				writer = new FileWriter("ffcountrydata.csv", true);
 
+				writer.append(country);
+				writer.append(COMMA_DELIMITER);
+				writer.append(gdp);
+				writer.append(COMMA_DELIMITER);
+				writer.append(population);
+				writer.append(COMMA_DELIMITER);
+				writer.append(co2);
+				writer.append(NEW_LINE_SEPARATOR);
+
+			} catch (IOException e) {
+				e.printStackTrace();
+			} finally {
+
+				try {
+					writer.flush();
+					writer.close();
+				} catch (IOException e) {
+					System.out.println("Error while flushing/closing fileWriter !!!");
+					e.printStackTrace();
+				}
+
+			}
+		}
+
+		if (driver instanceof ChromeDriver) {
+			try {
+				writer = new FileWriter("chcountrydata.csv", true);
+
+				writer.append(country);
+				writer.append(COMMA_DELIMITER);
+				writer.append(gdp);
+				writer.append(COMMA_DELIMITER);
+				writer.append(population);
+				writer.append(COMMA_DELIMITER);
+				writer.append(co2);
+				writer.append(NEW_LINE_SEPARATOR);
+
+			} catch (IOException e) {
+				e.printStackTrace();
+			} finally {
+
+				try {
+					writer.flush();
+					writer.close();
+				} catch (IOException e) {
+					System.out.println("Error while flushing/closing fileWriter !!!");
+					e.printStackTrace();
+				}
+
+			}
+		}
+
+		if (driver instanceof InternetExplorerDriver) {
+			try {
+				writer = new FileWriter("iecountrydata.csv", true);
+
+				writer.append(country);
+				writer.append(COMMA_DELIMITER);
+				writer.append(gdp);
+				writer.append(COMMA_DELIMITER);
+				writer.append(population);
+				writer.append(COMMA_DELIMITER);
+				writer.append(co2);
+				writer.append(NEW_LINE_SEPARATOR);
+
+			} catch (IOException e) {
+				e.printStackTrace();
+			} finally {
+
+				try {
+					writer.flush();
+					writer.close();
+				} catch (IOException e) {
+					System.out.println("Error while flushing/closing fileWriter !!!");
+					e.printStackTrace();
+				}
+
+			}
 		}
 
 	}

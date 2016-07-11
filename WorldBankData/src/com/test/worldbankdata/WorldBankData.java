@@ -7,11 +7,14 @@ import java.util.Comparator;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
-import org.junit.*;
 import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
+import org.testng.annotations.AfterTest;
+import org.testng.annotations.BeforeTest;
+import org.testng.annotations.Parameters;
+import org.testng.annotations.Test;
 
 public class WorldBankData {
 
@@ -31,17 +34,22 @@ public class WorldBankData {
 
 	private WorldBankDataUtilities utiliy;
 
-	@Before
-	public void setUp() throws Exception {
-		// System.setProperty("webdriver.ie.driver",
-		// "D:\\sele\\IEDriverServer_Win32_2.53.1\\IEDriverServer.exe");
-		// driver = new InternetExplorerDriver();
-
-		System.setProperty("webdriver.chrome.driver", "D:\\sele\\chromedriver_win32\\chromedriver.exe");
-		driver = new ChromeDriver();
-		// driver = new FirefoxDriver();
+	@BeforeTest
+	@Parameters("browser")
+	public void setUp(String browser) throws Exception {
+		if (browser.equalsIgnoreCase("firefox")) {
+			driver = new FirefoxDriver();
+		} else if (browser.equalsIgnoreCase("chrome")) {
+			System.setProperty("webdriver.chrome.driver", "D:\\sele\\chromedriver_win32\\chromedriver.exe");
+			driver = new ChromeDriver();
+		} else if (browser.equalsIgnoreCase("ie")) {
+			System.setProperty("webdriver.ie.driver", "D:\\sele\\IEDriverServer_Win32_2.53.1\\IEDriverServer.exe");
+			driver = new InternetExplorerDriver();
+		} else {
+			throw new Exception("Browser is not correct");
+		}
 		baseUrl = "http://www.worldbank.org";
-		driver.manage().window().maximize();
+		//driver.manage().window().maximize();
 
 		driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
 		utiliy = new WorldBankDataUtilities();
@@ -65,7 +73,7 @@ public class WorldBankData {
 		driver.get(highincome);
 
 		String countrylist[] = utiliy.getCountList();
-		utiliy.generateCsvFileHeader();
+		utiliy.generateCsvFileHeader(driver);
 
 		for (String country : countrylist) {
 			cntry = "";
@@ -125,7 +133,7 @@ public class WorldBankData {
 				mapco2.put(cntry, co2long);
 			}
 
-			utiliy.generateCsvFile(cntry.replaceAll("[,]+", ""), gdp.replaceAll("[,]+", ""),
+			utiliy.generateCsvFile(driver, cntry.replaceAll("[,]+", ""), gdp.replaceAll("[,]+", ""),
 					popu.replaceAll("[,]+", ""), co2.replaceAll("[,]+", ""));
 
 			driver.get(highincome);
@@ -138,7 +146,12 @@ public class WorldBankData {
 		});
 		int count = 1;
 		try {
-			writergdp = new FileWriter("top3countriesbygdp.log");
+			if (driver instanceof FirefoxDriver)
+				writergdp = new FileWriter("fftop3countriesbygdp.log");
+			if (driver instanceof ChromeDriver)
+				writergdp = new FileWriter("chtop3countriesbygdp.log");
+			if (driver instanceof InternetExplorerDriver)
+				writergdp = new FileWriter("ietop3countriesbygdp.log");
 			writergdp.append("Top 3 countries by GDP at market prices (current US$)");
 			writergdp.append(System.lineSeparator());
 			writergdp.append("=====================================================");
@@ -152,7 +165,13 @@ public class WorldBankData {
 
 			try {
 				if (count <= 3) {
-					writergdp = new FileWriter("top3countriesbygdp.log", true);
+					if (driver instanceof FirefoxDriver)
+						writergdp = new FileWriter("fftop3countriesbygdp.log", true);
+					if (driver instanceof ChromeDriver)
+						writergdp = new FileWriter("chtop3countriesbygdp.log", true);
+					if (driver instanceof InternetExplorerDriver)
+						writergdp = new FileWriter("ietop3countriesbygdp.log", true);
+
 					writergdp.append(
 							((Map.Entry<String, Long>) e).getKey() + " : " + ((Map.Entry<String, Long>) e).getValue());
 					writergdp.append(System.lineSeparator());
@@ -173,7 +192,12 @@ public class WorldBankData {
 		});
 		int countpopu = 1;
 		try {
-			writerpopu = new FileWriter("top3countriesbypopu.log");
+			if (driver instanceof FirefoxDriver)
+				writerpopu = new FileWriter("fftop3countriesbypopu.log");
+			if (driver instanceof ChromeDriver)
+				writerpopu = new FileWriter("chtop3countriesbypopu.log");
+			if (driver instanceof InternetExplorerDriver)
+				writerpopu = new FileWriter("ietop3countriesbypopu.log");
 			writerpopu.append("Top 3 countries by Population");
 			writerpopu.append(System.lineSeparator());
 			writerpopu.append("=============================");
@@ -187,7 +211,13 @@ public class WorldBankData {
 
 			try {
 				if (countpopu <= 3) {
-					writerpopu = new FileWriter("top3countriesbypopu.log", true);
+					if (driver instanceof FirefoxDriver)
+						writerpopu = new FileWriter("fftop3countriesbypopu.log", true);
+					if (driver instanceof ChromeDriver)
+						writerpopu = new FileWriter("chtop3countriesbypopu.log", true);
+					if (driver instanceof InternetExplorerDriver)
+						writerpopu = new FileWriter("ietop3countriesbypopu.log", true);
+
 					writerpopu.append(
 							((Map.Entry<String, Long>) e).getKey() + " : " + ((Map.Entry<String, Long>) e).getValue());
 					writerpopu.append(System.lineSeparator());
@@ -208,7 +238,12 @@ public class WorldBankData {
 		});
 		int countco2 = 1;
 		try {
-			writerco2 = new FileWriter("top3countriesbyco2.log");
+			if (driver instanceof FirefoxDriver)
+				writerco2 = new FileWriter("fftop3countriesbyco2.log");
+			if (driver instanceof ChromeDriver)
+				writerco2 = new FileWriter("chtop3countriesbyco2.log");
+			if (driver instanceof InternetExplorerDriver)
+				writerco2 = new FileWriter("ietop3countriesbyco2.log");
 			writerco2.append("Top 3 countries by CO2 emissions");
 			writerco2.append(System.lineSeparator());
 			writerco2.append("================================");
@@ -222,7 +257,13 @@ public class WorldBankData {
 
 			try {
 				if (countco2 <= 3) {
-					writerco2 = new FileWriter("top3countriesbyco2.log", true);
+					if (driver instanceof FirefoxDriver)
+						writerco2 = new FileWriter("fftop3countriesbyco2.log", true);
+					if (driver instanceof ChromeDriver)
+						writerco2 = new FileWriter("chtop3countriesbyco2.log", true);
+					if (driver instanceof InternetExplorerDriver)
+						writerco2 = new FileWriter("ietop3countriesbyco2.log", true);
+
 					writerco2.append(
 							((Map.Entry<String, Long>) e).getKey() + " : " + ((Map.Entry<String, Long>) e).getValue());
 					writerco2.append(System.lineSeparator());
@@ -236,7 +277,7 @@ public class WorldBankData {
 		}
 	}
 
-	@After
+	@AfterTest
 	public void tearDown() throws Exception {
 		driver.quit();
 		endTime = System.currentTimeMillis();
