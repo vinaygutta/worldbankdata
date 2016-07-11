@@ -30,10 +30,9 @@ Setup
 	a. selenium-server-standalone-2.53.1.jar
 	b. selenium-java-2.53.1.zip and extract it.
 	c. IEDriverServer_Win32_2.53.1.zip and extract it.
-3. Download the below JUNIT files.
-	a. junit-4.12.jar
-	b. hamcrest-core-1.3.jar
+	d. chromedriver_win32.zip and extract it.
 4. Install FF browser version 34.
+5. Install Chrome browser.
 
 How to Import Project into Eclipse
 ----------------------------------
@@ -52,31 +51,45 @@ Adding JARS to build path
 4. Choose the below JARs and add them.
 	a. selenium-server-standalone-2.53.1.jar
 	b. selenium-java-2.53.1.jar
-	c. junit-4.12.jar
-	d. hamcrest-core-1.3.jar
 5. Click on "Apply" and then "OK" button.
+6. Open Eclipse market place and install TestNG.
 
-How to execute the Script on FF browser
----------------------------------------
-1. Open Eclipse and then open the WorldBankData project.
-2. Naviage to src->com.text.worldbankdta on the "Package" section of eclipse.
-3. Double click on "WorldBankData.java" file.
-4. Ensure that in the "setUp()" method the line "driver=new FirefoxDriver()" is uncommented.
-5. Click on the eclipse Run menu item and then choose "Run As -> JUnit test".
+How to execute the Script in parallel on FF, IE and Chrome browsers
+-------------------------------------------------------------------
+Open the testngBrowserMultipleExecution.xml xml file from the project directory.
 
-How to execute the Script on IE browser
----------------------------------------
-1. Download the IEDriverServer_Win32_2.53.1.zip file from http://docs.seleniumhq.org/download/ and extract it.
-2. Open Eclipse and then open the WorldBankData project.
-3. Naviage to src->com.text.worldbankdta on the "Package" section of eclipse.
-4. Double click on "WorldBankData.java" file.
-5. Make the below changes in the "setUp()" method 
-	a. Comment the line "driver=new FirefoxDriver()".
-	b. Uncomment the line System.setProperty("webdriver.ie.driver", "D:\\sele\\IEDriverServer_Win32_2.53.1\\IEDriverServer.exe")" and change the path of "IEDriverServer.exe" file appropriately.
-	c. Uncomment the line driver = new InternetExplorerDriver();
-6. Click on the eclipse Run menu item and then choose "Run As -> JUnit test".
+The below will be the content
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="TestSuite" thread-count="3" parallel="tests">
+  <test name="ChromeTest">
+  <parameter name="browser" value="Chrome" />
+    <classes>
+       <class name="com.test.worldbankdata.WorldBankData">
+       </class>
+    </classes>
+  </test>
+  <test name="FirefoxTest">
+  <parameter name="browser" value="Firefox" />
+    <classes>
+       <class name="com.test.worldbankdata.WorldBankData">
+       </class>
+    </classes>
+  </test>
+  <test name="IETest">
+  <parameter name="browser" value="IE" />
+    <classes>
+       <class name="com.test.worldbankdata.WorldBankData">
+       </class>
+    </classes>
+  </test>
+ </suite>
+ 
+ Ensure that the parallel="tests" is present in the suite xml element.
+ 
+ Right click on the xml file and then choose "Run As -> TestNG Suite".
 
 Tested on the below platform
 ----------------------------
 OS: Win 8.1 Pro x32
-Browsers: Firefox 34 and IE11
+Browsers: Firefox 34 and IE11 and Chrome 51.
